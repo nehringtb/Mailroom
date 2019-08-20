@@ -1,31 +1,11 @@
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-package com.client.common;
+package mailroom;
 
 import java.io.*;
 import java.sql.*;
 import java.text.DateFormat;
 import java.util.*;
 import java.util.Date;
-=======
->>>>>>> origin/master
->>>>>>> origin/Tom
-package mailroom;
 
-import java.io.*;
-import java.sql.*;
-import java.util.*;
-
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
->>>>>>> origin/Tom
->>>>>>> origin/master
->>>>>>> origin/Tom
 import javax.swing.JOptionPane;
 
 
@@ -64,11 +44,6 @@ public class DatabaseManager
 			//Prepare setup
 			//Load people
 			//Create connection string
-<<<<<<< HEAD
-			//Prepare for data flow
-=======
-			//Prepare for data flow			
->>>>>>> origin/Tom
 			File people = new File(fileLocation);
 			FileInputStream fStream;
 			try 
@@ -82,18 +57,10 @@ public class DatabaseManager
 					createPerson(person);
 				}
 				br.close();
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-				
+
 				loadRoutes();
 				loadStops();
-=======
->>>>>>> origin/Tom
->>>>>>> origin/master
->>>>>>> origin/Tom
+
 			} 
 			catch (Exception e) 
 			{
@@ -180,11 +147,7 @@ public class DatabaseManager
 			asuPeople.add(new Person(firstName, lastName, email, idNumber, boxNumber));
 		}
 	}
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 	public void loadRoutes()
 	{
 		//create route in here
@@ -206,42 +169,31 @@ public class DatabaseManager
 			JOptionPane.showMessageDialog(null, "Error Connecting to Database");
 		}
 	}
-	public void loadStops()
-	{
+	public void loadStops() {
 		//create stop in here
 		PreparedStatement statement = null;
-		try
-		{
+		try {
 			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
 			statement = conn.prepareStatement("select * from Stop;");
 			ResultSet rs = statement.executeQuery();
-			while(rs.next())
-			{
+			while (rs.next()) {
 				String name = rs.getString("Name");
 				int id = rs.getInt("stop_id");
 				int route = rs.getInt("route_id");
 				stops.add(new Stop(name, route, id));
 			}
-		}
-		catch(Exception e)
-		{
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Error Connecting to Database");
 		}
-=======
->>>>>>> origin/master
+	}
+
 	public void createRoute(String route)
 	{
 		//create route in here
 	}
-	public void createStop(String stop)
-	{
+	public void createStop(String stop) {
 		//create stop in here
-<<<<<<< HEAD
-=======
->>>>>>> origin/Tom
->>>>>>> origin/master
 	}
->>>>>>> origin/Tom
 	
 	///---Packages---///
 	public void addPackage(Package p)
@@ -249,17 +201,13 @@ public class DatabaseManager
 		try
 		{
 			//Create Insertion String
-<<<<<<< HEAD
+
 			PreparedStatement statement = null;
 			Connection conn = DriverManager.getConnection(dbLocation);
-=======
-			Class.forName("org.sqlite.JDBC");
-			PreparedStatement statement = null;
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
->>>>>>> origin/Tom
+
 			statement = conn.prepareStatement("insert into Package(Tracking_Number, Date, ASU_Email, First_Name, Last_Name, Box_Number, At_Stop, Picked_Up, stop_id)" + 
 			"values(?,?,?,?,?,?,?,?,?);");
-			
+
 			statement.setString(1, p.getTrackNum());
 			statement.setString(2, p.getDate());
 			statement.setString(3, p.getEmail());
@@ -283,30 +231,16 @@ public class DatabaseManager
 		}
 	}
 	//Backup(more logic involved)
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-	@SuppressWarnings("resource")
-=======
->>>>>>> origin/Tom
->>>>>>> origin/master
->>>>>>> origin/Tom
+
 	public void updatePackage(String tNumber, boolean value)
 	{
 		try
 		{
-<<<<<<< HEAD
+
 			PreparedStatement statement = null;
 			Connection conn = DriverManager.getConnection(dbLocation);
-=======
-			Class.forName("org.sqlite.JDBC");
-			PreparedStatement statement = null;
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
+
 			statement = conn.prepareStatement("select At_Stop from Package where Tracking_Number=?;");
 			ResultSet rs = statement.executeQuery();
 			if(rs.getBoolean("At_Stop"))
@@ -326,10 +260,7 @@ public class DatabaseManager
 				statement.setString(2, tNumber);
 				statement.execute();
 			}
-=======
->>>>>>> origin/Tom
->>>>>>> origin/master
->>>>>>> origin/Tom
+
 		}
 		catch(Exception e)
 		{
@@ -341,18 +272,12 @@ public class DatabaseManager
 	{
 		try
 		{
-<<<<<<< HEAD
+
 			PreparedStatement statement = null;
 			Connection conn = DriverManager.getConnection(dbLocation);
-			
-=======
-			Class.forName("org.sqlite.JDBC");
-			PreparedStatement statement = null;
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
-<<<<<<< HEAD
-			
-=======
-<<<<<<< HEAD
+
+
+
 			statement = conn.prepareStatement("alter table Package set At_Stop=?, set Picked_Up=?, set Pick_Up_Date=? where Tracking_Number=?;");
 			Date d = new Date();
 			String date = DateFormat.getDateInstance(DateFormat.SHORT).format(d);
@@ -361,11 +286,7 @@ public class DatabaseManager
 			statement.setString(3, date);
 			statement.setString(4, tNumber);
 			statement.execute();
-=======
-			
->>>>>>> origin/Tom
->>>>>>> origin/master
->>>>>>> origin/Tom
+
 		}
 		catch(Exception e)
 		{
@@ -378,14 +299,10 @@ public class DatabaseManager
 	{
 		try
 		{
-<<<<<<< HEAD
+
 			PreparedStatement statement = null;
 			Connection conn = DriverManager.getConnection(dbLocation);
-=======
-			Class.forName("org.sqlite.JDBC");
-			PreparedStatement statement = null;
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
->>>>>>> origin/Tom
+
 			statement = conn.prepareStatement("insert into Stop(Name, route_id, Is_Used) values (?,?,?);");
 			statement.setString(1, name);
 			for(int i = 0; i < routes.size(); i++)
@@ -399,14 +316,12 @@ public class DatabaseManager
 			//Hopefully its true(but you never know)
 			statement.setBoolean(3, isUsed);
 			
-<<<<<<< HEAD
-			statement.executeQuery();
-=======
+
 			if(statement.execute())
 			{
 				JOptionPane.showMessageDialog(null, "Stop " + name + " Added");
 			}
->>>>>>> origin/Tom
+
 		}
 		catch(Exception e)
 		{
@@ -418,14 +333,10 @@ public class DatabaseManager
 	{
 		try
 		{
-<<<<<<< HEAD
+
 			PreparedStatement statement = null;
 			Connection conn = DriverManager.getConnection(dbLocation);
-=======
-			Class.forName("org.sqlite.JDBC");
-			PreparedStatement statement = null;
-			Connection conn = DriverManager.getConnection("jdbc:sqlite:" + dbLocation);
->>>>>>> origin/Tom
+
 			statement = conn.prepareStatement("update Stop set Name = ?, isUsed = ?, route_id = ? where stop_id = ?;");
 			statement.setString(1, name);
 			for(int i = 0; i < routes.size(); i++)
@@ -439,14 +350,12 @@ public class DatabaseManager
 			//Hopefully its true(but you never know)
 			statement.setBoolean(3, isUsed);
 			
-<<<<<<< HEAD
-			statement.executeQuery();
-=======
+
 			if(statement.execute())
 			{
 				JOptionPane.showMessageDialog(null, "Stop " + name + " Updated");
 			}
->>>>>>> origin/Tom
+
 		}
 		catch(Exception e)
 		{
@@ -455,7 +364,7 @@ public class DatabaseManager
 		}
 	}
 
-<<<<<<< HEAD
+
 	public void addRoute(Route r) {
 		// TODO Auto-generated method stub
 		
@@ -479,7 +388,8 @@ public class DatabaseManager
 
 	public String getFileLocation() {
 		return fileLocation;
-=======
+	}
+
 	///---Routes---///
 	public void addRoute(String name) 
 	{
@@ -532,9 +442,7 @@ public class DatabaseManager
 		}
 	}
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
+
 	///---Package Searching---///
 	public List<Package> findPackage(String[] criteria)
 	{
@@ -657,30 +565,12 @@ public class DatabaseManager
 		return results;
 	}
 
-	///---Get Methods---///
-	public List<Stop> getStops()
-	{
-		return stops;
-	}
-	public List<Route> getRoutes()
-	{
-		return routes;
-=======
->>>>>>> origin/master
-	public ArrayList<Route> getRoutes() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Route>();
-	}
 
-	public ArrayList<Stop> getStopsFromRoute(String routeName) {
-		// TODO Auto-generated method stub
-		return new ArrayList<Stop>();
->>>>>>> origin/Tom
-	}
+
+
 
 	public ArrayList<Package> getPackagesFromStop(int id) {
 		// TODO Auto-generated method stub
-<<<<<<< HEAD
 		return null;
 	}
 
@@ -689,35 +579,4 @@ public class DatabaseManager
 		return null;
 	}
 
-	public ArrayList<Person> findPerson(String text, String text2) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	
-
-	
-	
-
-	
-
-	
-=======
-		return new ArrayList<Package>();
-	}
-
-	public ArrayList<Stop> getStops() {
-		// TODO Auto-generated method stub
-		return new ArrayList<Stop>();
-	}
-
-	public Person getPerson(String firstName, String lastName) {
-		// TODO Auto-generated method stub
-		return new Person("Thomas","Nehring", "fdsaf", "asdfsa", "252");
-<<<<<<< HEAD
-=======
->>>>>>> origin/Tom
->>>>>>> origin/master
-	}
->>>>>>> origin/Tom
 }

@@ -287,14 +287,9 @@ public class RouteMaker extends JPanel {
 			manager.updateStop(s, true, RouteField.getText());
 			
 		}
-		
-		
-<<<<<<< HEAD
+
 		manager.addRoute(new Route(RouteField.getText()));
-=======
-		manager.addRoute(RouteField.getText());
->>>>>>> origin/Tom
-		
+
 	}
 	  
   }
